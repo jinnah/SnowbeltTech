@@ -1154,7 +1154,7 @@ const THREADS = [
 class Component extends DCLogic {
   state = {
     navOpen: false, w: 1200, industry: 'hvac', mc: 0, thread: 0, phase: 0, chan: 0, procIn: false, concept: 0,
-    name:'', business:'', email:'', phone:'', type:'', goal:'', contact:'', consent:false, needs:[],
+    name:'', business:'', email:'', phone:'', type:'', goal:'', contact:'Text', consent:false, needs:[],
     errors:{}, sent:false, sending:false, sendError:'', smsConsent:false
   };
 
@@ -1249,8 +1249,10 @@ class Component extends DCLogic {
     // A half-typed number passes the checks above whenever an email is also
     // present, and then nobody notices until someone tries to dial it.
     if (ph && ph.length < 10) e.phone = 'Please enter a full phone number.';
-    // Whatever they pick has to be something we can actually do. There is no
-    // pre-selected default, so every choice here is one the visitor made.
+    // Whatever is selected has to be something we can actually do. "Text" is
+    // the default, so a mobile number is in practice required unless the
+    // visitor switches to Email - deliberate, this is a phone-first business.
+    // The empty case cannot happen today; it is a guard in case the default goes.
     if (!this.state.contact) e.contact = 'Tell us how you would rather be reached.';
     else if (this.state.contact === 'Text' && ph.length < 10) e.phone = 'Add a mobile number, or pick a different contact method.';
     else if (this.state.contact === 'Phone' && ph.length < 10) e.phone = 'Add a phone number, or pick a different contact method.';
