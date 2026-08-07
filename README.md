@@ -211,9 +211,15 @@ Either way, run without the `tls` profile and keep `HTTP_PORT` on loopback.
 
 ### What is in the image
 
-Only what the site serves: `index.html`, `support.js`, `robots.txt`, `sitemap.xml` and
-`assets/`. `.dockerignore` keeps `uploads/`, `_ds/`, `_build/`, `scraps/` and the docs out —
-that is roughly 5 MB of design-process baggage.
+Only what the site serves: `index.html`, `support.js`, `robots.txt`, `sitemap.xml`,
+`assets/`, and the two legal pages `privacy-policy/` and `sms-terms/`. `.dockerignore`
+keeps `uploads/`, `_ds/`, `_build/`, `scraps/` and the docs out — that is roughly 5 MB of
+design-process baggage.
+
+The legal pages are standalone HTML with their own inline `<style>`; they do not load
+`support.js` and do not use the `<x-dc>` runtime. They repeat the site's tokens (Manrope /
+IBM Plex Sans, the navy hero gradient, the footer) as plain CSS, so a design change on the
+home page does not propagate to them automatically.
 
 `Snowbelt AI Automation.dc.html` is deliberately **not** in the image. It is byte-identical
 to `index.html`, so serving both would publish the same page at two URLs and split its
@@ -226,9 +232,11 @@ Server behaviour, in `docker/nginx.conf`:
   and a long cache would strand visitors on a stale image after an update
 - gzip on text; images are already compressed
 - `nosniff`, `SAMEORIGIN`, `strict-origin-when-cross-origin`, and `server_tokens off`
-- unknown paths 404 rather than falling back to `index.html` — this is one page with
-  anchor navigation, not a client-side router, so a fallback would return 200 for URLs
+- unknown paths 404 rather than falling back to `index.html` — the home page is one page
+  with anchor navigation, not a client-side router, so a fallback would return 200 for URLs
   that do not exist and invite duplicate indexing
+- `/privacy-policy/` and `/sms-terms/` are real directories, served through `index
+  index.html`; the no-trailing-slash forms 301 to the slash form
 
 There is no Content-Security-Policy. The page is built from inline style attributes and an
 inline script, so any CSP would need `'unsafe-inline'` for both and buy very little. See
@@ -237,8 +245,10 @@ the note in `docker/security-headers.conf`.
 ## Deploying to a static host instead
 
 If you would rather skip Docker: upload `index.html`, `support.js`, `robots.txt`,
-`sitemap.xml` and `assets/` to Netlify, Vercel, Cloudflare Pages, or any static host.
-Fonts load from Google Fonts; nothing else is fetched. No build step.
+`sitemap.xml`, `assets/`, `privacy-policy/` and `sms-terms/` to Netlify, Vercel,
+Cloudflare Pages, or any static host. Fonts load from Google Fonts; nothing else is
+fetched. No build step. The legal pages reference `/assets/…` from the site root, so they
+need to be served from a real domain root rather than opened as local files.
 
 `index.html` and `Snowbelt AI Automation.dc.html` are kept byte-identical — edit one and
 copy it over the other, or the two will drift and the wrong one may ship.
