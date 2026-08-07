@@ -899,6 +899,7 @@ button,input,select,textarea{font:inherit}
               <label style="display:inline-flex;align-items:center;gap:9px;background:#fff;border:1.5px solid #CBD9E6;border-radius:999px;padding:11px 17px;cursor:pointer;font-size:15px;color:#22364C"><input type="radio" name="contactMethod" value="Text" checked="{{ cText }}" onChange="{{ onContact }}" style="accent-color:#0E7490;width:17px;height:17px">Text</label>
               <label style="display:inline-flex;align-items:center;gap:9px;background:#fff;border:1.5px solid #CBD9E6;border-radius:999px;padding:11px 17px;cursor:pointer;font-size:15px;color:#22364C"><input type="radio" name="contactMethod" value="Email" checked="{{ cEmail }}" onChange="{{ onContact }}" style="accent-color:#0E7490;width:17px;height:17px">Email</label>
             </div>
+            <sc-if value="{{ eContact }}"><span role="alert" style="font-size:13.5px;color:#B45309">{{ eContact }}</span></sc-if>
           </fieldset>
 
           <label style="display:flex;gap:12px;align-items:flex-start;cursor:pointer">
@@ -1153,7 +1154,7 @@ const THREADS = [
 class Component extends DCLogic {
   state = {
     navOpen: false, w: 1200, industry: 'hvac', mc: 0, thread: 0, phase: 0, chan: 0, procIn: false, concept: 0,
-    name:'', business:'', email:'', phone:'', type:'', goal:'', contact:'Phone', consent:false, needs:[],
+    name:'', business:'', email:'', phone:'', type:'', goal:'', contact:'', consent:false, needs:[],
     errors:{}, sent:false, sending:false, sendError:'', smsConsent:false
   };
 
@@ -1245,9 +1246,15 @@ class Component extends DCLogic {
     if (!em && !ph) { e.email = 'Add an email or a phone number so we can reply.'; e.phone = 'Add an email or a phone number so we can reply.'; }
     else if (em && !/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(em)) e.email = 'That email address does not look right.';
     else if (!em && ph.length < 10) e.phone = 'Please enter a full phone number.';
-    // Asking to be texted without leaving a number to text is a lead we cannot
-    // reach the way they asked to be reached.
-    if (this.state.contact === 'Text' && ph.length < 10) e.phone = 'Add a mobile number, or pick a different contact method.';
+    // A half-typed number passes the checks above whenever an email is also
+    // present, and then nobody notices until someone tries to dial it.
+    if (ph && ph.length < 10) e.phone = 'Please enter a full phone number.';
+    // Whatever they pick has to be something we can actually do. There is no
+    // pre-selected default, so every choice here is one the visitor made.
+    if (!this.state.contact) e.contact = 'Tell us how you would rather be reached.';
+    else if (this.state.contact === 'Text' && ph.length < 10) e.phone = 'Add a mobile number, or pick a different contact method.';
+    else if (this.state.contact === 'Phone' && ph.length < 10) e.phone = 'Add a phone number, or pick a different contact method.';
+    else if (this.state.contact === 'Email' && !em) e.email = 'Add an email address, or pick a different contact method.';
     // Consent with no number to send to is not consent to anything, and it
     // would be recorded as a valid opt-in against a blank mobile number.
     if (this.state.smsConsent && ph.length < 10) e.sms = 'Add a mobile number above to receive text updates, or clear the text-message box.';
@@ -1515,7 +1522,7 @@ class Component extends DCLogic {
       cPhone: s.contact === 'Phone', cText: s.contact === 'Text', cEmail: s.contact === 'Email',
       eName: s.errors.name, eEmail: s.errors.email, ePhone: s.errors.phone,
       eNeeds: s.errors.needs, eSms: s.errors.sms,
-      eBusiness: s.errors.business, eType: s.errors.type,
+      eBusiness: s.errors.business, eType: s.errors.type, eContact: s.errors.contact,
       presetSeo: this.presetSeo,
       presetWeb: this.presetWeb,
       conceptTabs: CONCEPTS.map((c, i) => {
