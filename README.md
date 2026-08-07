@@ -130,11 +130,85 @@ image band `<div>` at the top of the industry card; nothing else depends on it.
 derived from the real logo rather than redrawn — `_build/favicon.html` and `_build/og.html`
 are the sources; screenshot them at 512×512 and 1200×630 to regenerate.
 
-## Deploying
+## Hosting (Docker)
 
-Upload `Snowbelt AI Automation.dc.html` (renamed to `index.html` if you like), `support.js`
-and the `assets/` folder to Netlify, Vercel, Cloudflare Pages, or any static host. Fonts
-load from Google Fonts; nothing else is fetched. No build step.
+The site ships as an nginx container. There is no build step — the image is the static
+files plus a server config.
+
+```bash
+git clone https://github.com/jinnah/SnowbeltTech.git
+cd SnowbeltTech
+docker compose up -d --build
+```
+
+That serves the site on **port 8080**. To use port 80 instead:
+
+```bash
+echo "HTTP_PORT=80" > .env
+docker compose up -d
+```
+
+The default is 8080 rather than 80 so a first run cannot fail by colliding with an
+Apache or nginx already listening on 80 on a fresh VPS.
+
+To deploy an update after pushing changes:
+
+```bash
+git pull && docker compose up -d --build
+```
+
+**Verified working:** image builds at 77 MB, container reports `healthy`, the page renders
+with all images, and excluded paths (`/uploads/…`, `/_build/…`, `/README.md`, the `.dc.html`
+copy) correctly return 404.
+
+### TLS — read before pointing a domain at this
+
+**This container speaks plain HTTP only.** It has no certificate and no port 443. Putting
+it straight on the internet at port 80 means an unencrypted site, a browser "Not secure"
+warning, and — because the canonical URL and the OG tags all say `https://` — a mismatch
+between what you advertise and what you serve.
+
+Pick one before going live:
+
+- **Caddy or Traefik in front**, in the same compose project. Caddy gets a Let's Encrypt
+  certificate automatically from just a domain name and is the shortest path.
+- **Cloudflare in front** with proxying enabled. TLS terminates at Cloudflare; the origin
+  stays HTTP. Fastest to set up if the DNS is already there.
+- **Host nginx or Caddy on the VPS** as a reverse proxy to `127.0.0.1:8080`, with certbot.
+  Sensible if you will host more than this one site.
+
+In every case, keep the container bound to a local port and let the proxy hold 80 and 443.
+
+### What is in the image
+
+Only what the site serves: `index.html`, `support.js`, `robots.txt`, `sitemap.xml` and
+`assets/`. `.dockerignore` keeps `uploads/`, `_ds/`, `_build/`, `scraps/` and the docs out —
+that is roughly 5 MB of design-process baggage.
+
+`Snowbelt AI Automation.dc.html` is deliberately **not** in the image. It is byte-identical
+to `index.html`, so serving both would publish the same page at two URLs and split its
+search ranking.
+
+Server behaviour, in `docker/nginx.conf`:
+
+- `index.html` and `support.js` are `no-cache`, so a redeploy is visible immediately
+- `assets/` is cached 7 days — not `immutable`, because filenames are not content-hashed
+  and a long cache would strand visitors on a stale image after an update
+- gzip on text; images are already compressed
+- `nosniff`, `SAMEORIGIN`, `strict-origin-when-cross-origin`, and `server_tokens off`
+- unknown paths 404 rather than falling back to `index.html` — this is one page with
+  anchor navigation, not a client-side router, so a fallback would return 200 for URLs
+  that do not exist and invite duplicate indexing
+
+There is no Content-Security-Policy. The page is built from inline style attributes and an
+inline script, so any CSP would need `'unsafe-inline'` for both and buy very little. See
+the note in `docker/security-headers.conf`.
+
+## Deploying to a static host instead
+
+If you would rather skip Docker: upload `index.html`, `support.js`, `robots.txt`,
+`sitemap.xml` and `assets/` to Netlify, Vercel, Cloudflare Pages, or any static host.
+Fonts load from Google Fonts; nothing else is fetched. No build step.
 
 `index.html` and `Snowbelt AI Automation.dc.html` are kept byte-identical — edit one and
 copy it over the other, or the two will drift and the wrong one may ship.
