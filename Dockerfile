@@ -19,6 +19,11 @@ COPY robots.txt   ./
 COPY sitemap.xml  ./
 COPY assets/      ./assets/
 
+# Legal pages. Directory-style URLs, so nginx's `index index.html` serves each
+# one at /privacy-policy/ and /sms-terms/ without a redirect.
+COPY privacy-policy/ ./privacy-policy/
+COPY sms-terms/      ./sms-terms/
+
 # Fail the container if nginx stops serving. busybox wget ships in the alpine
 # image, so this needs no extra packages.
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
