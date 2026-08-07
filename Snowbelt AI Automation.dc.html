@@ -68,7 +68,7 @@ button,input,select,textarea{font:inherit}
 <header style="position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.88);backdrop-filter:blur(14px);border-bottom:1px solid #E2EAF2">
   <div style="max-width:1200px;margin:0 auto;padding:0 clamp(18px,4vw,40px);padding-left:max(clamp(18px,4vw,40px),env(safe-area-inset-left));padding-right:max(clamp(18px,4vw,40px),env(safe-area-inset-right));height:clamp(76px,10vw,104px);display:flex;align-items:center;gap:clamp(10px,3vw,28px)">
     <a href="#top" aria-label="SnowBeltTech home" style="display:flex;align-items:center;margin-right:auto;min-width:0">
-      <img src="assets/snowbelt-tech-logo.png" alt="SnowBeltTech" width="1942" height="666" style="height:clamp(46px,6.6vw,74px);width:auto;display:block">
+      <img src="assets/snowbelttech-logo.png" alt="SnowBeltTech" width="836" height="398" style="height:clamp(46px,6.6vw,74px);width:auto;display:block">
     </a>
 
     <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
@@ -898,7 +898,14 @@ button,input,select,textarea{font:inherit}
             <span style="font-size:14.5px;line-height:1.55;color:#4E637A">Optional: send me occasional emails about automation ideas for local service businesses.</span>
           </label>
 
-          <button type="submit" style="height:56px;border:0;border-radius:999px;background:#F59E0B;color:#0A1B2E;font-family:'Manrope',sans-serif;font-weight:800;font-size:17px;cursor:pointer;box-shadow:0 3px 0 #B45309" style-hover="background:#FBBF24" style-active="transform:translateY(2px);box-shadow:0 1px 0 #B45309">Request My Free Review</button>
+          <sc-if value="{{ sendError }}">
+            <p role="alert" style="display:flex;gap:11px;align-items:flex-start;background:#FEF6E7;border:1.5px solid #F5C86B;border-radius:14px;padding:14px 16px;font-size:14.5px;line-height:1.6;color:#7A4A08">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="2.2" stroke-linecap="round" style="width:19px;height:19px;flex:none;margin-top:2px" aria-hidden="true"><path d="M12 8v5M12 16.5v.5"></path><circle cx="12" cy="12" r="9"></circle></svg>
+              {{ sendError }}
+            </p>
+          </sc-if>
+
+          <button type="submit" disabled="{{ sending }}" aria-busy="{{ sending }}" style="height:56px;border:0;border-radius:999px;background:{{ submitBg }};color:#0A1B2E;font-family:'Manrope',sans-serif;font-weight:800;font-size:17px;cursor:{{ submitCursor }};box-shadow:0 3px 0 #B45309" style-hover="background:#FBBF24" style-active="transform:translateY(2px);box-shadow:0 1px 0 #B45309">{{ submitLabel }}</button>
 
           <p style="font-size:13.5px;line-height:1.6;color:#6A7F94">We use what you send only to prepare and discuss your workflow audit. We do not sell or share your information, and you can ask us to delete it at any time. Marketing email is off unless you check the box above.</p>
         </form>
@@ -913,7 +920,7 @@ button,input,select,textarea{font:inherit}
   <div style="max-width:1200px;margin:0 auto">
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:34px">
       <div>
-        <img src="assets/snowbelt-tech-logo-light.png" alt="SnowBeltTech" width="1942" height="666" style="height:76px;width:auto;max-width:100%;display:block">
+        <img src="assets/snowbelttech-logo.png" alt="SnowBeltTech" width="836" height="398" style="height:76px;width:auto;max-width:100%;display:block">
 
         <p style="margin-top:16px;font-size:15px;line-height:1.6;max-width:34ch">Helping local businesses automate, modernize, and grow. Buffalo, New York.</p>
       </div>
@@ -962,7 +969,9 @@ button,input,select,textarea{font:inherit}
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{}">
-const WEBHOOK = '[N8N WEBHOOK URL]';
+// n8n webhook. A POST here starts the service-request workflow, so the visitor
+// only sees "Request received" once n8n has actually accepted the payload.
+const WEBHOOK = 'https://n8n.snowbelttech.com/webhook/snowbelttech-service-request';
 
 const INDUSTRIES = [
   {id:'hvac', name:'HVAC', img:'assets/industries/hvac.jpg', alt:'An HVAC technician servicing an outdoor condenser unit beside a home on a winter day', d:'M12 3v18M12 8l4-3M12 8L8 5M12 15l4 3M12 15l-4 3M4 12h16',
@@ -1129,7 +1138,7 @@ class Component extends DCLogic {
   state = {
     navOpen: false, w: 1200, industry: 'hvac', mc: 0, thread: 0, phase: 0, chan: 0, procIn: false, concept: 0,
     name:'', business:'', email:'', phone:'', type:'', goal:'', contact:'Phone', consent:false, needs:[],
-    errors:{}, sent:false
+    errors:{}, sent:false, sending:false, sendError:''
   };
 
   // Started from renderVals as well as componentDidMount: the animations must not
@@ -1220,6 +1229,7 @@ class Component extends DCLogic {
 
   submit = (ev) => {
     ev.preventDefault();
+    if (this.state.sending) return;
     const errors = this.validate();
     this.setState({ errors });
     if (Object.keys(errors).length) return;
@@ -1230,10 +1240,32 @@ class Component extends DCLogic {
       preferredContact: this.state.contact, marketingConsent: this.state.consent,
       source: 'snowbelt-website', submittedAt: new Date().toISOString()
     };
-    if (WEBHOOK.charAt(0) !== '[') {
-      fetch(WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }).catch(() => {});
-    }
-    this.setState({ sent: true });
+    if (WEBHOOK.charAt(0) === '[') { this.setState({ sent: true }); return; }
+
+    // A lead is worth too much to lose silently, so the success screen waits
+    // for n8n to accept the POST. If it does not, say so and keep the filled-in
+    // form on screen with a way to reach us that does not depend on the webhook.
+    this.setState({ sending: true, sendError: '' });
+    const timeout = setTimeout(() => this.setState({
+      sending: false,
+      sendError: 'That took too long to send. Please try again, or call (646) 982-6252 / email hello@snowbelttech.com.'
+    }), 15000);
+
+    fetch(WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(res => {
+      clearTimeout(timeout);
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      this.setState({ sending: false, sent: true });
+    }).catch(() => {
+      clearTimeout(timeout);
+      this.setState({
+        sending: false,
+        sendError: 'We could not send that just now. Please try again, or call (646) 982-6252 / email hello@snowbelttech.com.'
+      });
+    });
   };
 
   field = (k) => (ev) => this.setState({ [k]: ev.target.value });
@@ -1438,6 +1470,10 @@ class Component extends DCLogic {
 
       sent: s.sent, notSent: !s.sent,
       submit: this.submit,
+      sending: s.sending, sendError: s.sendError,
+      submitLabel: s.sending ? 'Sending…' : 'Request My Free Review',
+      submitCursor: s.sending ? 'progress' : 'pointer',
+      submitBg: s.sending ? '#FCD34D' : '#F59E0B',
       fName: s.name, fBusiness: s.business, fEmail: s.email, fPhone: s.phone,
       fType: s.type, fGoal: s.goal, fConsent: s.consent,
       onName: this.field('name'), onBusiness: this.field('business'), onEmail: this.field('email'),
