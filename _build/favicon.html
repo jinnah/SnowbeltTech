@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:512px;height:512px}
+  body{
+    position:relative;overflow:hidden;
+    background:linear-gradient(150deg,#0E2C48 0%,#0A1B2E 55%,#061525 100%);
+  }
+  .glow{position:absolute;top:-30%;right:-30%;width:70%;height:70%;border-radius:50%;
+    background:radial-gradient(circle,rgba(34,211,238,0.30),transparent 65%)}
+  /* Lockup is 1942x666. The S mark spans x~60-560; the wordmark starts ~580.
+     Scale by 0.68 (=> 1320px wide), then clip to just the mark so the
+     wordmark never bleeds into the tile. */
+  .markbox{
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    width:340px;height:453px;overflow:hidden;
+  }
+  .markbox img{position:absolute;left:-41px;top:0;width:1320px;height:auto;display:block}
+</style>
+</head>
+<body>
+  <div class="glow"></div>
+  <div class="markbox"><img src="../assets/snowbelt-tech-logo-light.png" alt=""></div>
+</body>
+</html>

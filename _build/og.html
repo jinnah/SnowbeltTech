@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1200px;height:630px}
+  body{
+    position:relative;overflow:hidden;
+    background:linear-gradient(168deg,#061525 0%,#0A1B2E 32%,#0E2C48 62%,#123A5C 88%,#164668 100%);
+    font-family:'IBM Plex Sans',system-ui,sans-serif;color:#fff;
+  }
+  .dots{position:absolute;inset:0;opacity:.5;
+    background-image:radial-gradient(rgba(191,220,239,0.13) 1px, transparent 1px);background-size:30px 30px}
+  .glow-a{position:absolute;top:-190px;right:-150px;width:660px;height:660px;border-radius:50%;
+    background:radial-gradient(circle,rgba(34,211,238,0.22),transparent 65%)}
+  .glow-b{position:absolute;bottom:-230px;left:-120px;width:560px;height:560px;border-radius:50%;
+    background:radial-gradient(circle,rgba(245,158,11,0.14),transparent 66%)}
+  .wrap{position:relative;height:100%;padding:64px 72px;display:flex;flex-direction:column}
+  .logo{height:72px;width:auto;display:block}
+  .pill{margin-top:auto;display:inline-flex;align-items:center;gap:10px;align-self:flex-start;
+    font-size:15px;letter-spacing:.11em;text-transform:uppercase;font-weight:700;color:#A8CEE4;
+    background:rgba(125,211,252,0.07);border:1px solid rgba(125,211,252,0.26);padding:10px 18px;border-radius:999px}
+  .pill i{width:8px;height:8px;border-radius:50%;background:#7DD3FC;display:block}
+  h1{font-family:'Manrope',sans-serif;font-weight:800;letter-spacing:-0.025em;
+    font-size:62px;line-height:1.12;margin-top:26px}
+  h1 .cy{color:#22D3EE}
+  p.sub{margin-top:22px;font-size:23px;line-height:1.5;color:#A8C2D6;max-width:46ch}
+  .rule{margin-top:30px;height:5px;width:132px;border-radius:999px;
+    background:linear-gradient(90deg,#F59E0B,#FBBF24)}
+  .foot{margin-top:26px;font-size:19px;font-weight:600;color:#8FA9C0;letter-spacing:.01em}
+</style>
+</head>
+<body>
+  <div class="dots"></div><div class="glow-a"></div><div class="glow-b"></div>
+  <div class="wrap">
+    <img class="logo" src="../assets/snowbelt-tech-logo-light.png" alt="Snowbelt Tech">
+    <span class="pill"><i></i>Built for local service businesses</span>
+    <h1>Get found. Capture more leads.<br><span class="cy">Book more jobs.</span></h1>
+    <p class="sub">Web design, local SEO and workflow automation for local service businesses.</p>
+    <div class="rule"></div>
+    <div class="foot">Buffalo &amp; Western New York</div>
+  </div>
+</body>
+</html>

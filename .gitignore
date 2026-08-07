@@ -1,0 +1,17 @@
+# OS
+Thumbs.db
+ehthumbs.db
+desktop.ini
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Tooling that may appear later
+node_modules/
+*.log
+
+# Local screenshot/scratch output
+.playwright-mcp/
