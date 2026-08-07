@@ -835,6 +835,7 @@ button,input,select,textarea{font:inherit}
             <div style="display:flex;flex-direction:column;gap:7px">
               <label for="sb-business" style="font-size:14.5px;font-weight:600;color:#22364C">Business name</label>
               <input id="sb-business" name="business" type="text" autocomplete="organization" value="{{ fBusiness }}" onChange="{{ onBusiness }}" style="height:48px;padding:0 15px;border-radius:12px;border:1.5px solid #CBD9E6;background:#fff;font-size:16px;color:#0B1A2D" style-focus="border-color:#22D3EE">
+              <sc-if value="{{ eBusiness }}"><span role="alert" style="font-size:13.5px;color:#B45309">{{ eBusiness }}</span></sc-if>
             </div>
             <div style="display:flex;flex-direction:column;gap:7px">
               <label for="sb-email" style="font-size:14.5px;font-weight:600;color:#22364C">Email</label>
@@ -870,6 +871,7 @@ button,input,select,textarea{font:inherit}
               <option value="Professional services">Professional services</option>
               <option value="Other">Other</option>
             </select>
+            <sc-if value="{{ eType }}"><span role="alert" style="font-size:13.5px;color:#B45309">{{ eType }}</span></sc-if>
           </div>
 
           <fieldset style="border:0;padding:0;margin:0;display:flex;flex-direction:column;gap:10px">
@@ -1232,12 +1234,20 @@ class Component extends DCLogic {
 
   validate() {
     const e = {};
-    if (!this.state.name.trim()) e.name = 'Please tell us your name.';
+    // Either a person or a company is enough to address a reply to.
+    if (!this.state.name.trim() && !this.state.business.trim()) {
+      e.name = 'Add your name or your business name.';
+      e.business = 'Add your name or your business name.';
+    }
+    if (!this.state.type) e.type = 'Pick the closest match so we can prepare properly.';
     if (!this.state.needs.length) e.needs = 'Pick at least one — or choose “Not sure” and we’ll work it out.';
     const em = this.state.email.trim(), ph = this.state.phone.replace(/\D/g, '');
     if (!em && !ph) { e.email = 'Add an email or a phone number so we can reply.'; e.phone = 'Add an email or a phone number so we can reply.'; }
     else if (em && !/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(em)) e.email = 'That email address does not look right.';
     else if (!em && ph.length < 10) e.phone = 'Please enter a full phone number.';
+    // Asking to be texted without leaving a number to text is a lead we cannot
+    // reach the way they asked to be reached.
+    if (this.state.contact === 'Text' && ph.length < 10) e.phone = 'Add a mobile number, or pick a different contact method.';
     // Consent with no number to send to is not consent to anything, and it
     // would be recorded as a valid opt-in against a blank mobile number.
     if (this.state.smsConsent && ph.length < 10) e.sms = 'Add a mobile number above to receive text updates, or clear the text-message box.';
@@ -1505,6 +1515,7 @@ class Component extends DCLogic {
       cPhone: s.contact === 'Phone', cText: s.contact === 'Text', cEmail: s.contact === 'Email',
       eName: s.errors.name, eEmail: s.errors.email, ePhone: s.errors.phone,
       eNeeds: s.errors.needs, eSms: s.errors.sms,
+      eBusiness: s.errors.business, eType: s.errors.type,
       presetSeo: this.presetSeo,
       presetWeb: this.presetWeb,
       conceptTabs: CONCEPTS.map((c, i) => {
