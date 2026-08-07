@@ -848,6 +848,12 @@ button,input,select,textarea{font:inherit}
             </div>
           </div>
 
+          <label style="display:flex;gap:12px;align-items:flex-start;cursor:pointer;background:#fff;border:1.5px solid #CBD9E6;border-radius:14px;padding:14px 16px">
+            <input id="sb-sms-consent" name="smsConsent" type="checkbox" checked="{{ fSmsConsent }}" onChange="{{ onSmsConsent }}" style="accent-color:#0E7490;width:18px;height:18px;margin-top:3px;flex:none">
+            <span style="font-size:14.5px;line-height:1.6;color:#4E637A">Yes, text me about my service request. SnowBeltTech may send automated SMS about scheduling, appointment reminders, and service updates. Up to 5 messages per month. Message and data rates may apply. Reply STOP to cancel, HELP for help. Consent is not a condition of purchase. See our <a href="/sms-terms/" style="color:#0E7490;font-weight:600" style-hover="color:#0A1B2E">SMS Terms</a> and <a href="/privacy-policy/" style="color:#0E7490;font-weight:600" style-hover="color:#0A1B2E">Privacy Policy</a>.</span>
+          </label>
+          <sc-if value="{{ eSms }}"><span role="alert" style="margin-top:-8px;font-size:13.5px;color:#B45309">{{ eSms }}</span></sc-if>
+
           <div style="display:flex;flex-direction:column;gap:7px">
             <label for="sb-type" style="font-size:14.5px;font-weight:600;color:#22364C">Business type</label>
             <select id="sb-type" name="businessType" value="{{ fType }}" onChange="{{ onType }}" style="height:48px;padding:0 15px;border-radius:12px;border:1.5px solid #CBD9E6;background:#fff;font-size:16px;color:#0B1A2D" style-focus="border-color:#22D3EE">
@@ -972,6 +978,14 @@ button,input,select,textarea{font:inherit}
 // n8n webhook. A POST here starts the service-request workflow, so the visitor
 // only sees "Request received" once n8n has actually accepted the payload.
 const WEBHOOK = 'https://n8n.snowbelttech.com/webhook/snowbelttech-service-request';
+
+// The exact wording shown beside the SMS opt-in checkbox, sent with every
+// consenting submission so the workflow can store what the visitor actually
+// agreed to. Carrier vetting compares this string against the live form and
+// against the A2P campaign registration, so the three must match word for
+// word - change this and you must update both of the others.
+const SMS_CONSENT_TEXT = 'Yes, text me about my service request. SnowBeltTech may send automated SMS about scheduling, appointment reminders, and service updates. Up to 5 messages per month. Message and data rates may apply. Reply STOP to cancel, HELP for help. Consent is not a condition of purchase. See our SMS Terms and Privacy Policy.';
+const SMS_CONSENT_VERSION = '2026-08-07';
 
 const INDUSTRIES = [
   {id:'hvac', name:'HVAC', img:'assets/industries/hvac.jpg', alt:'An HVAC technician servicing an outdoor condenser unit beside a home on a winter day', d:'M12 3v18M12 8l4-3M12 8L8 5M12 15l4 3M12 15l-4 3M4 12h16',
@@ -1138,7 +1152,7 @@ class Component extends DCLogic {
   state = {
     navOpen: false, w: 1200, industry: 'hvac', mc: 0, thread: 0, phase: 0, chan: 0, procIn: false, concept: 0,
     name:'', business:'', email:'', phone:'', type:'', goal:'', contact:'Phone', consent:false, needs:[],
-    errors:{}, sent:false, sending:false, sendError:''
+    errors:{}, sent:false, sending:false, sendError:'', smsConsent:false
   };
 
   // Started from renderVals as well as componentDidMount: the animations must not
@@ -1224,6 +1238,9 @@ class Component extends DCLogic {
     if (!em && !ph) { e.email = 'Add an email or a phone number so we can reply.'; e.phone = 'Add an email or a phone number so we can reply.'; }
     else if (em && !/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(em)) e.email = 'That email address does not look right.';
     else if (!em && ph.length < 10) e.phone = 'Please enter a full phone number.';
+    // Consent with no number to send to is not consent to anything, and it
+    // would be recorded as a valid opt-in against a blank mobile number.
+    if (this.state.smsConsent && ph.length < 10) e.sms = 'Add a mobile number above to receive text updates, or clear the text-message box.';
     return e;
   }
 
@@ -1238,6 +1255,9 @@ class Component extends DCLogic {
       phone: this.state.phone, businessType: this.state.type, goal: this.state.goal,
       needs: this.state.needs,
       preferredContact: this.state.contact, marketingConsent: this.state.consent,
+      smsConsent: this.state.smsConsent,
+      smsConsentText: this.state.smsConsent ? SMS_CONSENT_TEXT : '',
+      smsConsentVersion: this.state.smsConsent ? SMS_CONSENT_VERSION : '',
       source: 'snowbelt-website', submittedAt: new Date().toISOString()
     };
     if (WEBHOOK.charAt(0) === '[') { this.setState({ sent: true }); return; }
@@ -1480,9 +1500,11 @@ class Component extends DCLogic {
       onPhone: this.field('phone'), onType: this.field('type'), onGoal: this.field('goal'),
       onContact: (ev) => this.setState({ contact: ev.target.value }),
       onConsent: (ev) => this.setState({ consent: ev.target.checked }),
+      fSmsConsent: s.smsConsent,
+      onSmsConsent: (ev) => this.setState({ smsConsent: ev.target.checked }),
       cPhone: s.contact === 'Phone', cText: s.contact === 'Text', cEmail: s.contact === 'Email',
       eName: s.errors.name, eEmail: s.errors.email, ePhone: s.errors.phone,
-      eNeeds: s.errors.needs,
+      eNeeds: s.errors.needs, eSms: s.errors.sms,
       presetSeo: this.presetSeo,
       presetWeb: this.presetWeb,
       conceptTabs: CONCEPTS.map((c, i) => {
