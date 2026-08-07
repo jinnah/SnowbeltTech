@@ -19,7 +19,7 @@ replaced them are **stand-ins that need your real values**. Search and replace:
 
 | Stand-in currently in the file | Where | Notes |
 | --- | --- | --- |
-| `(716) 555-0100` / `tel:+17165550100` | header call button, mobile nav, final CTA, contact list, footer | 555 numbers are reserved and unreachable by design |
+| ~~phone~~ | — | **Real number is live:** `(646) 982-6252` / `tel:+16469826252`, also in the JSON-LD as `telephone`. Note it is a 646 (New York City) area code on a site targeting Buffalo / 716 — intentional or not, worth a look |
 | `hello@snowbelttech.com` | contact list, footer (`mailto:`) | |
 | `https://snowbelttech.com` | `og:url`, `og:image`, `twitter:image`, canonical, JSON-LD `url`, `robots.txt`, `sitemap.xml` | guessed from the brand name |
 | `https://www.linkedin.com/company/snowbelt-tech` | footer "Follow us" | guessed handle — confirm or remove the link |
@@ -82,7 +82,7 @@ JSON-LD `url`, `robots.txt` and `sitemap.xml`. Use the full origin with no trail
    hero's navy gradient; source is `_build/og.html`, so you can edit that file and
    re-screenshot it at a 1200×630 viewport to regenerate.
 2. **Claim and fill the Google Business Profile.** For a local service business this outranks almost everything else on the page. Once it's live, add its URL to the JSON-LD as `sameAs`.
-3. **Fill in the real NAP.** The structured data deliberately omits phone, address and geo because inventing them is worse than leaving them out. Add `telephone` and a full `address` once they exist, and keep them character-for-character identical to the Google Business Profile.
+3. **Fill in the real NAP.** `telephone` is now in the structured data. `address` is still locality-only (Buffalo, NY) and geo is still omitted, because inventing them is worse than leaving them out. Add a full `address` once it exists, and keep the phone and address character-for-character identical to the Google Business Profile — a mismatch between the two actively hurts local ranking.
 4. ~~Add `<html lang="en">`~~ — **done**, it's on the root element.
 
 **Single-page tradeoff worth knowing.** One page can only rank for one primary intent. Someone searching "website design Buffalo" and someone searching "missed call text back" want different pages. When you're ready to compete on more than the brand name, the highest-value additions are separate indexable pages per service (`/web-design-buffalo`, `/local-seo-analysis`) and per service area — each with its own title, description and h1. The current page is the right hub for those to link from.
