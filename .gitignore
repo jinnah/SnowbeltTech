@@ -13,5 +13,9 @@ desktop.ini
 node_modules/
 *.log
 
+# Per-server config - see .env.example. Never commit this; it names the live
+# domain and contact address for the deployment.
+.env
+
 # Local screenshot/scratch output
 .playwright-mcp/

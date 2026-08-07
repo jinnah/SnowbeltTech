@@ -1,17 +1,21 @@
-# Snowbelt Tech - static site behind nginx.
+# Snowbelt Tech - static site behind nginx, with optional HTTPS via Caddy.
 #
-#   docker compose up -d --build      start (or restart after a git pull)
+#   HTTP only (no certificate):
+#     docker compose up -d --build
+#     -> http://<host>:8080
+#
+#   HTTPS (recommended for a live domain):
+#     cp .env.example .env     # then set SITE_DOMAIN and ACME_EMAIL
+#     docker compose --profile tls up -d --build
+#     -> https://<your-domain>
+#
 #   docker compose logs -f            follow logs
 #   docker compose down               stop and remove
 #
-# HTTP_PORT controls the host port. It defaults to 8080 so a first run cannot
-# collide with anything already listening on 80 on the VPS. To serve the site
-# directly on port 80:
-#
-#   echo "HTTP_PORT=80" > .env && docker compose up -d
-#
-# See README ("Hosting") before pointing a domain here - this container speaks
-# plain HTTP only and needs something in front of it for TLS.
+# HTTP_PORT controls the host port for the nginx container. It defaults to
+# 8080 so a first run cannot collide with anything already listening on 80.
+# When running with the tls profile, set HTTP_PORT=127.0.0.1:8080 so the
+# origin is reachable only from the host and the public site is HTTPS-only.
 
 services:
   web:
@@ -29,3 +33,35 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
+
+  # Only starts with:  docker compose --profile tls up -d
+  caddy:
+    image: caddy:2-alpine
+    container_name: snowbelt-tech-caddy
+    profiles: ["tls"]
+    restart: unless-stopped
+    depends_on:
+      - web
+    ports:
+      - "80:80"     # required for the ACME HTTP challenge and the ->HTTPS redirect
+      - "443:443"
+      - "443:443/udp"  # HTTP/3
+    environment:
+      SITE_DOMAIN: ${SITE_DOMAIN:?set SITE_DOMAIN in .env - see .env.example}
+      ACME_EMAIL: ${ACME_EMAIL:-}
+    volumes:
+      - ./docker/Caddyfile:/etc/caddy/Caddyfile:ro
+      # caddy_data holds the issued certificates and MUST persist. Without it
+      # every restart re-requests a certificate and will hit Let's Encrypt's
+      # rate limit (5 per domain per week) after a few deploys.
+      - caddy_data:/data
+      - caddy_config:/config
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  caddy_data:
+  caddy_config:

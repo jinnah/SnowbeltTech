@@ -161,23 +161,53 @@ git pull && docker compose up -d --build
 with all images, and excluded paths (`/uploads/…`, `/_build/…`, `/README.md`, the `.dc.html`
 copy) correctly return 404.
 
-### TLS — read before pointing a domain at this
+## HTTPS
 
-**This container speaks plain HTTP only.** It has no certificate and no port 443. Putting
-it straight on the internet at port 80 means an unencrypted site, a browser "Not secure"
-warning, and — because the canonical URL and the OG tags all say `https://` — a mismatch
-between what you advertise and what you serve.
+Caddy is included as an opt-in compose profile. It fetches and renews a Let's Encrypt
+certificate automatically — no certbot step, nothing to run on a cron.
 
-Pick one before going live:
+**Before you start it, DNS for `SITE_DOMAIN` must already point at the server.** Caddy
+proves control of the domain over port 80; if the record does not resolve yet, issuance
+fails and retries in a loop.
 
-- **Caddy or Traefik in front**, in the same compose project. Caddy gets a Let's Encrypt
-  certificate automatically from just a domain name and is the shortest path.
-- **Cloudflare in front** with proxying enabled. TLS terminates at Cloudflare; the origin
-  stays HTTP. Fastest to set up if the DNS is already there.
-- **Host nginx or Caddy on the VPS** as a reverse proxy to `127.0.0.1:8080`, with certbot.
-  Sensible if you will host more than this one site.
+```bash
+cp .env.example .env
+# edit .env: set SITE_DOMAIN and ACME_EMAIL
+docker compose --profile tls up -d --build
+```
 
-In every case, keep the container bound to a local port and let the proxy hold 80 and 443.
+That gives you:
+
+- `https://<your-domain>` with a real certificate, renewed automatically
+- `http://` → `https://` on a 308, handled by Caddy
+- HTTP/3 (the compose file publishes 443/udp)
+- HSTS at one year, without `preload` — preload submission is effectively irreversible
+- the nginx origin bound to `127.0.0.1:8080`, so the plain-HTTP origin is not reachable
+  from outside; that is what the `HTTP_PORT=127.0.0.1:8080` line in `.env.example` is for
+
+**Certificates live in the `caddy_data` volume and must persist.** Never run
+`docker compose down -v` on the live server — `-v` deletes that volume, and re-issuing on
+every deploy hits Let's Encrypt's limit of 5 certificates per domain per week. Plain
+`docker compose down` is safe.
+
+**`SITE_DOMAIN` must match the canonical URL in `index.html`.** If the canonical names the
+apex and you serve `www`, you advertise one URL and serve another. To redirect `www` to the
+apex, uncomment the block at the bottom of `docker/Caddyfile` — but only once a DNS record
+for `www` exists, or Caddy cannot get a certificate for that name either.
+
+**Verified locally:** with `SITE_DOMAIN=localhost`, Caddy signs with its internal CA and the
+full stack returns HTTPS 200, passes the origin's cache and security headers straight
+through, strips its own `Server` header, and 308s HTTP to HTTPS. Issuance against Let's
+Encrypt itself needs a public domain and could not be exercised here.
+
+### Alternatives to Caddy
+
+- **Cloudflare** proxying in front. TLS terminates at Cloudflare and the origin stays HTTP.
+  Fastest if DNS is already there. Run without the `tls` profile.
+- **An existing nginx or Caddy on the VPS** reverse-proxying to `127.0.0.1:8080`. Sensible
+  if you will host more than this one site.
+
+Either way, run without the `tls` profile and keep `HTTP_PORT` on loopback.
 
 ### What is in the image
 

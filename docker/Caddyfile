@@ -1,0 +1,46 @@
+# Caddy terminates TLS and reverse-proxies to the nginx container.
+#
+# SITE_DOMAIN drives certificate issuance:
+#   - a real domain  -> Caddy fetches a Let's Encrypt cert automatically
+#   - localhost      -> Caddy signs with its own internal CA, no ACME, no DNS
+#
+# ACME_EMAIL is where Let's Encrypt sends expiry warnings. It is ignored for
+# localhost.
+{
+	email {$ACME_EMAIL}
+}
+
+{$SITE_DOMAIN} {
+	reverse_proxy web:80
+
+	header {
+		# Tell browsers to use HTTPS for a year. Deliberately WITHOUT
+		# "preload" - preload submission is effectively irreversible and
+		# would strand the domain on HTTPS-only even if you later needed
+		# to serve plain HTTP. Add it only once the site has been stable
+		# on HTTPS for a while and you are sure.
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+		# Do not advertise the proxy.
+		-Server
+	}
+
+	# No compression directive here on purpose: nginx behind this already
+	# gzips text and passes it through, so compressing again would just
+	# burn CPU.
+
+	log {
+		output stdout
+		format console
+	}
+}
+
+# --- Optional: redirect www to the apex domain -------------------------------
+# The canonical URL and the OG tags all point at the apex, so a www visitor
+# should be redirected rather than served a duplicate. Uncomment ONLY once a
+# DNS record for www actually exists - without one, Caddy cannot complete the
+# ACME challenge for that name and will retry in a loop.
+#
+# www.{$SITE_DOMAIN} {
+# 	redir https://{$SITE_DOMAIN}{uri} permanent
+# }

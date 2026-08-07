@@ -27,6 +27,10 @@ Dockerfile
 docker-compose.yml
 docker-compose.*.yml
 
+# Server config. .env in particular must never reach an image layer.
+.env
+.env.example
+
 # Local scratch
 .playwright-mcp/
 *.log
