@@ -1,3 +1,14 @@
+# SnowBeltTech website
+
+> **2026-11 redesign (branch `redesign-2026`).** The site is now plain HTML with no x-dc runtime:
+> `index.html` (homepage), shared `assets/site.css` and `assets/site.js`, and three service pages:
+> `/google-business-profile/`, `/local-seo/` and `/estimate-calculators/`.
+> The service pages are generated: edit the fragments in `_build/pages/`, then run
+> `python _build/build_pages.py . _build/pages`. That copies the header and footer from
+> `index.html`, so change the nav there first. The form posts to `/api/lead-request` with
+> `requestType` set to `free-demo-site`, `website-health-check` or `service-inquiry`.
+> The notes below describe the previous single-file design and are partly out of date.
+
 # Snowbelt AI Automation — website
 
 Single-page marketing site. One file: `Snowbelt AI Automation.dc.html`. Open it in a browser, or upload it with `support.js` to any static host.

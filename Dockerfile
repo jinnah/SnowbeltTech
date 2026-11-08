@@ -24,6 +24,11 @@ COPY assets/      ./assets/
 COPY privacy-policy/ ./privacy-policy/
 COPY sms-terms/      ./sms-terms/
 
+# Service pages (generated from _build/pages/ by _build/build_pages.py).
+COPY google-business-profile/ ./google-business-profile/
+COPY local-seo/               ./local-seo/
+COPY estimate-calculators/    ./estimate-calculators/
+
 # Fail the container if nginx stops serving. busybox wget ships in the alpine
 # image, so this needs no extra packages.
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
