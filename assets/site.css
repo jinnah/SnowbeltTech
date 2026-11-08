@@ -75,7 +75,6 @@ section{padding:clamp(72px,9vw,120px) 0}
 @media (min-width:1040px){.hero .wrap{grid-template-columns:1.05fr .95fr;gap:56px}}
 .hero h1{font-size:clamp(42px,5.1vw,74px);line-height:1;letter-spacing:-.03em;margin:22px 0 24px}
 .hero h1 em,.page-hero h1 em,h2 em{font-family:var(--serif);font-style:italic;font-weight:400;font-stretch:100%;letter-spacing:-.01em;color:var(--teal);position:relative;white-space:nowrap;padding-right:.04em}
-.hero h1 em::after{content:"";position:absolute;left:-.04em;right:-.02em;bottom:.1em;height:.2em;background:var(--signal);opacity:.35;border-radius:3px;z-index:-1;transform:skewX(-12deg)}
 .dark h2 em{color:var(--sky)}
 .check-form{margin-top:32px;display:flex;flex-wrap:wrap;gap:10px;max-width:560px;background:var(--paper);padding:8px;border-radius:999px;box-shadow:0 1px 0 var(--line), 0 18px 40px -24px rgba(7,26,61,.45);border:1px solid var(--line)}
 .check-form input{flex:1 1 220px;min-width:0;border:0;background:transparent;font:500 16.5px var(--body);padding:0 16px;height:52px;color:var(--text)}
