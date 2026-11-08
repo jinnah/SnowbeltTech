@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>SnowBeltTech | Website Design &amp; AI Website Monitoring, Buffalo NY</title>
-<meta name="description" content="Fast websites for Western New York service businesses, then AI agents watch them every day: uptime, SSL, speed, broken links, forms. Plain-English SEO and security reports every month. Free website health check.">
+<title>SnowBeltTech | Custom Website Design in Buffalo NY · Free Demo Site</title>
+<meta name="description" content="Custom website design for Western New York businesses. Get a free demo site and unlimited revisions, then optional AI-agent monitoring and monthly SEO and security reports.">
 <link rel="canonical" href="https://snowbelttech.com/">
 <meta name="robots" content="index, follow">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://snowbelttech.com/">
-<meta property="og:title" content="SnowBeltTech | Websites that work, and stay working">
-<meta property="og:description" content="Website design plus AI-agent monitoring and monthly SEO and security reports for local businesses in Western New York.">
+<meta property="og:title" content="SnowBeltTech | See your new website before you pay">
+<meta property="og:description" content="Custom website design with a free demo site and unlimited revisions, for local businesses in Western New York.">
 <meta property="og:image" content="https://snowbelttech.com/assets/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://snowbelttech.com/assets/og-image.png">
@@ -132,6 +132,23 @@ section{padding:clamp(72px,9vw,120px) 0}
 .hero-links{margin-top:26px;display:flex;gap:18px;flex-wrap:wrap;font-size:15.5px}
 .hero-links a{color:var(--navy);font-weight:600;text-underline-offset:4px}
 @media (max-width:520px){.check-form{border-radius:20px}.check-form .btn{width:100%}}
+.hero-ctas{margin-top:32px;display:flex;flex-wrap:wrap;gap:12px}
+.btn-lg{min-height:58px;padding:0 28px;font-size:17px}
+@media (max-width:520px){.hero-ctas .btn{width:100%}}
+.hero-art{position:relative;aspect-ratio:1.15/1;max-width:620px;width:100%;justify-self:center}
+.frame{position:absolute;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 30px 60px -30px rgba(10,23,48,.55), 0 0 0 1px rgba(10,23,48,.06)}
+.frame img{width:100%;aspect-ratio:1140/720;object-fit:cover;object-position:top}
+.frame-back{width:78%;right:0;top:0;transform:rotate(2deg)}
+.frame-front{width:82%;left:0;bottom:6%;transform:rotate(-1.5deg)}
+.badge{position:absolute;display:flex;align-items:center;gap:12px;background:#fff;border-radius:14px;padding:12px 16px;box-shadow:0 18px 40px -18px rgba(10,23,48,.5);border:1px solid var(--line)}
+.badge b{display:block;font-size:14.5px;line-height:1.2}
+.badge small{font-size:12.5px;color:var(--muted)}
+.badge-ic{width:30px;height:30px;border-radius:50%;background:var(--ok-soft);color:var(--ok);display:grid;place-items:center;font-weight:700}
+.badge-dot{width:10px;height:10px;border-radius:50%;background:var(--signal);box-shadow:0 0 0 4px rgba(31,211,154,.2)}
+.badge-demo{left:-2%;top:12%}
+.badge-mon{right:2%;bottom:0;background:var(--ink);border-color:var(--ink);color:#fff}
+.badge-mon small{color:var(--muted-dark)}
+@media (max-width:560px){.badge{padding:9px 12px;gap:9px}.badge b{font-size:13px}.badge small{font-size:11.5px}.badge-demo{top:4%}}
 
 /* console */
 .console{background:var(--ink);border-radius:var(--r-lg);color:#E6EEF7;box-shadow:0 40px 80px -40px rgba(10,23,48,.7), 0 0 0 1px rgba(255,255,255,.04) inset;overflow:hidden;font-family:var(--mono)}
@@ -187,6 +204,33 @@ section{padding:clamp(72px,9vw,120px) 0}
 .svc-link{font-weight:600;font-size:15px;color:var(--navy);text-decoration:none}
 .svc.feature .svc-link{color:var(--signal)}
 .note{margin-top:22px;font-size:15px;color:var(--muted)}
+.design-hero{background:var(--ink);color:#fff;border-radius:28px;display:grid;overflow:hidden;position:relative}
+.design-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(50% 70% at 100% 0%, rgba(43,139,181,.35), transparent 70%);pointer-events:none}
+@media (min-width:980px){.design-hero{grid-template-columns:1.25fr .75fr}}
+.dh-main{position:relative;padding:clamp(28px,4vw,52px);display:grid;gap:16px;align-content:start}
+.dh-main h3{font-size:clamp(28px,3.4vw,40px);letter-spacing:-.02em;font-weight:750}
+.dh-main p{color:#C3D1E1;font-size:18px;max-width:560px}
+.dh-list{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:11px 24px;font-size:16px}
+@media (min-width:600px){.dh-list{grid-template-columns:1fr 1fr}}
+.dh-list li{display:flex;gap:10px}
+.dh-list li::before{content:"";width:18px;height:18px;flex:none;margin-top:3px;border-radius:50%;background:rgba(31,211,154,.16) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.2 2.2 4.8-4.8' fill='none' stroke='%231FD39A' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain}
+.dh-list li:nth-child(-n+2){font-weight:600;color:#fff}
+.dh-foot{margin-top:14px;padding-top:22px;border-top:1px solid var(--line-dark);display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between}
+.dh-foot .from{color:var(--muted-dark)}.dh-foot .from b{color:#fff}
+.dh-foot .tbd{background:rgba(245,179,66,.18);color:#F5C66E}
+.dh-steps{position:relative;list-style:none;margin:0;padding:clamp(28px,4vw,52px);background:var(--ink-2);display:grid;gap:0;counter-reset:d;align-content:center}
+@media (max-width:979px){.dh-steps{border-top:1px solid var(--line-dark)}}
+.dh-steps li{counter-increment:d;display:grid;grid-template-columns:40px 1fr;column-gap:16px;padding:0 0 26px;position:relative}
+.dh-steps li:last-child{padding-bottom:0}
+.dh-steps li::before{content:counter(d);grid-row:span 2;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font:600 15px var(--mono);background:var(--ink);border:1.5px solid var(--line-dark);color:var(--ice);position:relative;z-index:1}
+.dh-steps li:first-child::before{background:var(--signal);border-color:var(--signal);color:var(--signal-ink)}
+.dh-steps li:not(:last-child)::after{content:"";position:absolute;left:19px;top:40px;bottom:0;width:2px;background:var(--line-dark)}
+.dh-steps b{font-size:17px;margin-top:8px}
+.dh-steps span{color:var(--muted-dark);font-size:15px}
+.sub-head{margin:clamp(48px,6vw,72px) 0 24px;display:grid;gap:6px}
+.sub-head h3{font-size:clamp(22px,2.4vw,28px)}
+.sub-head p{color:var(--muted)}
+@media (min-width:900px){.services-2{grid-template-columns:repeat(2,1fr)}}
 
 /* agents (dark) */
 .dark{background:var(--ink);color:#fff;position:relative;overflow:hidden}
@@ -194,6 +238,10 @@ section{padding:clamp(72px,9vw,120px) 0}
 .dark .wrap{position:relative}
 .dark .lede{color:var(--muted-dark)}
 .dark .eyebrow{color:var(--signal)}
+.mon-head{display:grid;gap:40px;align-items:center;margin-bottom:clamp(40px,5vw,60px)}
+@media (min-width:1040px){.mon-head{grid-template-columns:1fr 1fr;gap:56px}}
+.dark .console{border:1px solid var(--line-dark);background:#08132A}
+.dark .metric{background:#08132A}
 .checks{display:grid;gap:1px;background:var(--line-dark);border:1px solid var(--line-dark);border-radius:var(--r-lg);overflow:hidden}
 @media (min-width:700px){.checks{grid-template-columns:repeat(2,1fr)}}
 @media (min-width:1040px){.checks{grid-template-columns:repeat(3,1fr)}}
@@ -270,7 +318,7 @@ section{padding:clamp(72px,9vw,120px) 0}
 @media (min-width:1100px){.plans{grid-template-columns:repeat(4,1fr)}}
 .plan{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);padding:28px 24px;display:flex;flex-direction:column;gap:14px}
 .plan.pop{border:2px solid var(--navy);position:relative}
-.plan.pop::before{content:"Most picked";position:absolute;top:-13px;left:22px;background:var(--navy);color:#fff;font:500 11.5px/1 var(--mono);letter-spacing:.06em;padding:7px 10px;border-radius:999px}
+.plan.pop::before{content:"Free demo first";position:absolute;top:-13px;left:22px;background:var(--navy);color:#fff;font:500 11.5px/1 var(--mono);letter-spacing:.06em;padding:7px 10px;border-radius:999px}
 .plan h3{font-size:19px}
 .price{font:650 34px/1 var(--display);letter-spacing:-.02em}
 .price small{font:500 14px var(--body);color:var(--muted);letter-spacing:0}
@@ -342,6 +390,17 @@ fieldset{border:0;padding:0;margin:0}
 .trap{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .send-error{background:#FDECEA;color:#8E2A20;border-radius:12px;padding:12px 14px;font-size:14.5px}
 .form .btn{width:100%}
+.mode{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.mode label{position:relative;cursor:pointer}
+.mode input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.mode span{display:grid;gap:2px;padding:14px 16px;border-radius:14px;border:1.5px solid #CBD7E2;height:100%}
+.mode b{font-size:15.5px}.mode small{font-size:13px;color:var(--muted)}
+.mode input:checked+span{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink);background:#F4F8FB}
+.mode input:focus-visible+span{outline:3px solid var(--teal);outline-offset:2px}
+@media (max-width:420px){.mode{grid-template-columns:1fr}}
+.form .lbl-health,.form .opt-health{display:none}
+.form.is-health .lbl-health,.form.is-health .opt-health{display:inline}
+.form.is-health .lbl-demo{display:none}
 .done{text-align:center;padding:30px 10px;display:grid;gap:12px;justify-items:center}
 .done-icon{width:64px;height:64px;border-radius:50%;background:var(--ok-soft);display:grid;place-items:center;color:var(--ok)}
 
@@ -369,28 +428,28 @@ footer{background:#071125;color:var(--muted-dark);padding:56px 0 30px;font-size:
   <div class="wrap">
     <a class="logo" href="/" aria-label="SnowBeltTech home"><img src="/assets/snowbelttech-wordmark.png" alt="SnowBeltTech" width="205" height="43"></a>
     <nav class="nav" aria-label="Main">
-      <a href="#services">Services</a>
+      <a href="#services">Web design</a>
       <a href="#monitoring">Monitoring</a>
       <a href="#reports">Reports</a>
       <a href="#work">Our work</a>
       <a href="#pricing">Pricing</a>
       <a href="#faq">FAQ</a>
     </nav>
-    <a class="btn btn-signal cta" href="#health-check">Free health check</a>
+    <a class="btn btn-signal cta" href="#get-started">Free demo site</a>
     <a class="call" href="tel:+16469826252" aria-label="Call SnowBeltTech at (646) 982-6252">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>Call
     </a>
     <button class="menu-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><span></span></button>
   </div>
   <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile">
-    <a href="#services">Services</a>
+    <a href="#services">Web design</a>
     <a href="#monitoring">Monitoring</a>
     <a href="#reports">Reports</a>
     <a href="#work">Our work</a>
     <a href="#pricing">Pricing</a>
     <a href="#faq">FAQ</a>
     <a href="tel:+16469826252">Call (646) 982-6252</a>
-    <a class="btn btn-signal" href="#health-check">Get a free health check</a>
+    <a class="btn btn-signal" href="#get-started">Get a free demo site</a>
   </nav>
 </header>
 
@@ -399,40 +458,31 @@ footer{background:#071125;color:var(--muted-dark);padding:56px 0 30px;font-size:
 <section class="hero" aria-labelledby="hero-title">
   <div class="wrap">
     <div>
-      <span class="eyebrow">Web design + AI monitoring · Buffalo, NY</span>
-      <h1 id="hero-title">Websites that work. <em>And stay</em> working.</h1>
-      <p class="lede">We build fast, good-looking websites for local businesses across Western New York. Then our AI agents check them every day for downtime, security gaps, slow pages, broken forms and SEO problems. Every month you get a report in plain English.</p>
-      <form class="check-form" id="quick-check" novalidate>
-        <label for="quick-url" class="trap">Your website address</label>
-        <input id="quick-url" type="url" inputmode="url" autocomplete="url" placeholder="yourbusiness.com" aria-label="Your website address">
-        <button class="btn btn-signal" type="submit">Check my site free <span class="arrow" aria-hidden="true">→</span></button>
-      </form>
-      <div class="reassure"><span>Free, no obligation</span><span>Works on any website</span><span>Report in 1–2 business days</span></div>
-      <div class="hero-links"><a href="#work">See sites we've built</a><a href="#reports">What's in a report</a></div>
+      <span class="eyebrow">Custom website design · Buffalo, NY</span>
+      <h1 id="hero-title">See your new website <em>before</em> you pay a dime.</h1>
+      <p class="lede">We design custom websites for local businesses across Western New York. Tell us about your business and we'll build you a <b style="color:var(--text)">free demo site</b>. Want changes? We offer <b style="color:var(--text)">unlimited revisions</b> until it's exactly right. After launch, our AI agents keep it fast, secure and working.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-signal btn-lg" href="#get-started">Get my free demo site <span class="arrow" aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost btn-lg" href="#work">See our work</a>
+      </div>
+      <div class="reassure"><span>Free demo, no obligation</span><span>Unlimited revisions</span><span>Custom design, never a template</span></div>
     </div>
 
-    <div class="console" role="img" aria-label="Example monitoring dashboard: site online, SSL valid for 74 days, pages load in 1.8 seconds, forms working, no broken links, and a feed of the AI agent's recent checks.">
-      <div class="console-bar"><span class="dots"><i></i><i></i><i></i></span>snowbelt-agent · watching 24/7<span class="live">LIVE</span></div>
-      <div class="console-site"><b>northlinehvac.com</b><small>example site · last check <span id="ago">12s</span> ago</small></div>
-      <div class="metrics">
-        <div class="metric"><span>Uptime 30d</span><b>99.98%</b></div>
-        <div class="metric"><span>SSL cert</span><b>74 days</b></div>
-        <div class="metric"><span>Page load</span><b>1.8 s</b></div>
-        <div class="metric"><span>Contact form</span><b>Working</b></div>
-        <div class="metric"><span>Broken links</span><b>0</b></div>
-        <div class="metric warn"><span>Domain renews</span><b>41 days</b></div>
-      </div>
-      <ul class="log" id="log" aria-hidden="true"></ul>
+    <div class="hero-art" aria-hidden="true">
+      <div class="frame frame-back"><div class="shot-bar"><i></i><i></i><i></i><span>primetimefireprotection.com</span></div><img src="/assets/work/primetime.jpg" alt="" width="1140" height="720"></div>
+      <div class="frame frame-front"><div class="shot-bar"><i></i><i></i><i></i><span>biggersuds.com</span></div><img src="/assets/work/biggersuds.jpg" alt="" width="1140" height="720"></div>
+      <div class="badge badge-demo"><span class="badge-ic">✓</span><div><b>Demo ready</b><small>Revision 3 approved</small></div></div>
+      <div class="badge badge-mon"><span class="badge-dot"></span><div><b>Monitored 24/7</b><small>99.98% uptime · SSL OK</small></div></div>
     </div>
   </div>
 </section>
 
-<div class="strip" aria-label="What we watch">
+<div class="strip" aria-label="What you get">
   <div class="wrap">
-    <div><b>5 min</b> uptime checks</div>
-    <div><b>Daily</b> SSL, speed &amp; form tests</div>
-    <div><b>Weekly</b> broken-link crawl</div>
-    <div><b>Monthly</b> SEO &amp; security report</div>
+    <div><b>Free</b> demo site</div>
+    <div><b>Unlimited</b> revisions</div>
+    <div><b>Mobile-first</b> custom design</div>
+    <div><b>24/7</b> monitoring after launch</div>
   </div>
 </div>
 
@@ -440,29 +490,47 @@ footer{background:#071125;color:var(--muted-dark);padding:56px 0 30px;font-size:
 <section id="services" aria-labelledby="services-title">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">What we do</span>
-      <h2 id="services-title">Build it right. Watch it closely. Tell you what matters.</h2>
-      <p class="lede">Three services that work alone or together. Already have a website you like? We can monitor and report on it, even if we didn't build it.</p>
+      <span class="eyebrow">Website design</span>
+      <h2 id="services-title">A website built for your business, not pulled from a template.</h2>
+      <p class="lede">Your website is often the first thing a customer sees. We design every site from scratch around your services, your area and how your customers like to reach you.</p>
     </div>
-    <div class="services">
-      <article class="svc reveal">
-        <div class="svc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18M8 21h8M12 18v3"/></svg></div>
-        <span class="svc-tag">01 · Website design</span>
-        <h3>A website that brings in calls</h3>
-        <p>Custom-designed, mobile-first sites that load fast, rank locally and make it easy to call or ask for a quote.</p>
-        <ul>
-          <li>Custom design, no templates</li>
+
+    <article class="design-hero reveal">
+      <div class="dh-main">
+        <span class="svc-tag" style="color:var(--signal)">Our main service</span>
+        <h3>Custom website design</h3>
+        <p>Mobile-first sites that load fast, show up on Google and make it easy to call or request a quote.</p>
+        <ul class="dh-list">
+          <li>Free demo site before you commit</li>
+          <li>Unlimited revisions until it's right</li>
+          <li>Custom design, never a template</li>
           <li>Built for phones first</li>
           <li>Quote and contact forms</li>
           <li>Local SEO set up from day one</li>
-          <li>Hosting and SSL set up for you</li>
+          <li>Hosting, domain and SSL handled</li>
+          <li>Easy updates after launch</li>
         </ul>
-        <div class="svc-foot"><span class="from">From <b><span class="tbd">$TBD</span></b></span><a class="svc-link" href="#work">See our work →</a></div>
-      </article>
+        <div class="dh-foot">
+          <span class="from">From <b><span class="tbd">$TBD</span></b></span>
+          <a class="btn btn-signal" href="#get-started">Get my free demo site <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <ol class="dh-steps">
+        <li><b>Free demo</b><span>We build a working demo of your new site, at no cost.</span></li>
+        <li><b>Unlimited revisions</b><span>Tell us what to change. We keep refining until you love it.</span></li>
+        <li><b>Launch</b><span>We take care of the domain, hosting and SSL, and go live.</span></li>
+        <li><b>Watched 24/7</b><span>Optional monitoring keeps it fast, secure and working.</span></li>
+      </ol>
+    </article>
 
+    <div class="sub-head reveal">
+      <h3>After launch: keep it working</h3>
+      <p>Optional care services for sites we build, and for sites we didn't.</p>
+    </div>
+    <div class="services services-2">
       <article class="svc feature reveal">
         <div class="svc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg></div>
-        <span class="svc-tag">02 · Website monitoring</span>
+        <span class="svc-tag">Website monitoring</span>
         <h3>AI agents on watch, 24/7</h3>
         <p>We find out your site is down, insecure or broken before your customers do, and we tell you right away.</p>
         <ul>
@@ -477,7 +545,7 @@ footer{background:#071125;color:var(--muted-dark);padding:56px 0 30px;font-size:
 
       <article class="svc reveal">
         <div class="svc-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h4"/></svg></div>
-        <span class="svc-tag">03 · Monthly reports</span>
+        <span class="svc-tag">Monthly reports</span>
         <h3>SEO, security &amp; uptime in plain English</h3>
         <p>One short report each month: how you're showing up on Google, how safe your site is, and what to fix first.</p>
         <ul>
@@ -496,10 +564,26 @@ footer{background:#071125;color:var(--muted-dark);padding:56px 0 30px;font-size:
 <!-- MONITORING -->
 <section class="dark" id="monitoring" aria-labelledby="mon-title">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="eyebrow">AI-agent monitoring</span>
+    <div class="mon-head">
+    <div class="sec-head reveal" style="margin-bottom:0">
+      <span class="eyebrow">After launch · AI-agent monitoring</span>
       <h2 id="mon-title">Small problems get caught before they cost you jobs.</h2>
       <p class="lede">A form that quietly stopped sending, an expired certificate that shows a "Not secure" warning, a page that takes eight seconds to load on a phone. You usually find these out from a customer, if you find out at all. Our agents look for them all day.</p>
+      <div><a class="btn btn-signal" href="#get-started" data-mode="health" style="margin-top:8px">Free health check for my current site</a></div>
+    </div>
+    <div class="console reveal" role="img" aria-label="Example monitoring dashboard: site online, SSL valid for 74 days, pages load in 1.8 seconds, forms working, no broken links, and a feed of the AI agent's recent checks.">
+      <div class="console-bar"><span class="dots"><i></i><i></i><i></i></span>snowbelt-agent · watching 24/7<span class="live">LIVE</span></div>
+      <div class="console-site"><b>northlinehvac.com</b><small>example site · last check <span id="ago">12s</span> ago</small></div>
+      <div class="metrics">
+        <div class="metric"><span>Uptime 30d</span><b>99.98%</b></div>
+        <div class="metric"><span>SSL cert</span><b>74 days</b></div>
+        <div class="metric"><span>Page load</span><b>1.8 s</b></div>
+        <div class="metric"><span>Contact form</span><b>Working</b></div>
+        <div class="metric"><span>Broken links</span><b>0</b></div>
+        <div class="metric warn"><span>Domain renews</span><b>41 days</b></div>
+      </div>
+      <ul class="log" id="log" aria-hidden="true"></ul>
+    </div>
     </div>
     <div class="checks">
       <div class="chk reveal"><div class="chk-top"><h3>Uptime</h3><span class="freq">Every 5 min</span></div><p>We check that your site loads from outside your network, and send you a text or email within minutes if it goes down.</p></div>
@@ -602,13 +686,13 @@ footer{background:#071125;color:var(--muted-dark);padding:56px 0 30px;font-size:
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="eyebrow">How it works</span>
-      <h2 id="how-title">From free check-up to fully watched in about a week.</h2>
+      <h2 id="how-title">From free demo to live website, with no risk to you.</h2>
     </div>
     <div class="steps">
-      <div class="step reveal"><h3>Free health check</h3><p>Send us your web address. We check speed, security, SEO and forms, and send you the results.</p></div>
-      <div class="step reveal"><h3>Quick call</h3><p>We go over what we found in 15 minutes. No pressure and no jargon.</p></div>
-      <div class="step reveal"><h3>Build or connect</h3><p>We build your new site, or we hook monitoring up to the site you already have.</p></div>
-      <div class="step reveal"><h3>Watched &amp; reported</h3><p>The agents start checking. You get alerts when something breaks and a report every month.</p></div>
+      <div class="step reveal"><h3>Tell us about your business</h3><p>Fill in the short form or give us a call. Tell us about your services, your area and any sites you like.</p></div>
+      <div class="step reveal"><h3>Get your free demo</h3><p>We design a working demo of your new website and send you a private link. No cost, no commitment.</p></div>
+      <div class="step reveal"><h3>Unlimited revisions</h3><p>Ask for as many changes as you want: colors, wording, photos, layout. We keep going until you love it.</p></div>
+      <div class="step reveal"><h3>Launch &amp; keep watch</h3><p>Approve it and we launch. Add monitoring to keep the site fast, secure and working.</p></div>
     </div>
   </div>
 </section>
@@ -622,33 +706,33 @@ footer{background:#071125;color:var(--muted-dark);padding:56px 0 30px;font-size:
       <p class="lede">Every business is different, so the final price depends on what you need. These are where most projects start. Monthly plans are month to month.</p>
     </div>
     <div class="plans">
-      <div class="plan reveal">
+      <div class="plan pop reveal">
         <h3>Website design</h3>
         <div class="price"><span class="pre">One-time, from</span><span class="tbd">$TBD</span></div>
-        <p>A custom site built to win local customers.</p>
-        <ul><li>Custom, mobile-first design</li><li>Quote and contact forms</li><li>Local SEO setup</li><li>Hosting and SSL setup</li></ul>
-        <a class="btn btn-ghost" href="#health-check">Talk about a site</a>
+        <p>A custom site built to win local customers. See it free first.</p>
+        <ul><li><b>Free demo site</b></li><li><b>Unlimited revisions</b></li><li>Custom, mobile-first design</li><li>Quote and contact forms</li><li>Local SEO setup</li><li>Hosting, domain and SSL setup</li></ul>
+        <a class="btn btn-signal" href="#get-started">Get my free demo site</a>
       </div>
       <div class="plan reveal">
         <h3>Monitor</h3>
         <div class="price"><span class="pre">From</span><span class="tbd">$TBD</span><small>/mo</small></div>
         <p>Round-the-clock checks with instant alerts.</p>
         <ul><li>Uptime every 5 minutes</li><li>SSL and domain expiry alerts</li><li>Daily speed and form tests</li><li>Weekly broken-link crawl</li><li>Text and email alerts</li></ul>
-        <a class="btn btn-ghost" href="#health-check">Start with a free check</a>
+        <a class="btn btn-ghost" href="#get-started" data-mode="health">Start with a free check</a>
       </div>
-      <div class="plan pop reveal">
+      <div class="plan reveal">
         <h3>Monitor + Reports</h3>
         <div class="price"><span class="pre">From</span><span class="tbd">$TBD</span><small>/mo</small></div>
         <p>Everything in Monitor, plus a monthly look at the bigger picture.</p>
         <ul><li>Everything in Monitor</li><li>Monthly SEO report</li><li>Monthly security report</li><li>Ranked fix list</li><li>Optional review call</li></ul>
-        <a class="btn btn-dark" href="#health-check">Start with a free check</a>
+        <a class="btn btn-ghost" href="#get-started" data-mode="health">Start with a free check</a>
       </div>
       <div class="plan reveal">
         <h3>Fixes &amp; updates</h3>
         <div class="price"><span class="pre">Quoted per job, from</span><span class="tbd">$TBD</span></div>
         <p>When a report or alert finds something, we can fix it for you.</p>
         <ul><li>You approve a quote first</li><li>Content and photo updates</li><li>Speed and SEO fixes</li><li>Security patches</li></ul>
-        <a class="btn btn-ghost" href="#health-check">Ask about a fix</a>
+        <a class="btn btn-ghost" href="#get-started">Ask about a fix</a>
       </div>
     </div>
     <p class="price-note reveal">Third-party costs such as domain registration, premium plugins or SMS fees are passed through at cost. Monitoring and reports work on sites we didn't build, including WordPress, Wix, Squarespace and custom sites.</p>
@@ -664,12 +748,12 @@ footer{background:#071125;color:var(--muted-dark);padding:56px 0 30px;font-size:
       <p class="lede">We also set up tools that help you answer and follow up with customers faster. Ask about any of them.</p>
     </div>
     <div class="more-grid">
-      <a class="mini reveal" href="#health-check" data-need="AI chatbot"><i><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg></i><div><b>AI website chatbot</b><span>Answers common questions and collects leads around the clock.</span></div></a>
-      <a class="mini reveal" href="#health-check" data-need="AI receptionist"><i><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></i><div><b>AI receptionist</b><span>Answers calls, books appointments and passes along urgent calls.</span></div></a>
-      <a class="mini reveal" href="#health-check" data-need="Missed-call text-back"><i><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></i><div><b>Missed-call text-back</b><span>Sends an instant text when you can't pick up, so the lead doesn't call your competitor.</span></div></a>
-      <a class="mini reveal" href="#health-check" data-need="Lead capture and CRM"><i><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 5h18M6 12h12M10 19h4"/></svg></i><div><b>Lead capture &amp; CRM</b><span>Puts every call, form and text into one list with follow-up reminders.</span></div></a>
-      <a class="mini reveal" href="#health-check" data-need="Workflow automation"><i><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M9 6h5a4 4 0 0 1 4 4v5"/></svg></i><div><b>Workflow automation</b><span>Automatic quotes, review requests, reminders and handoffs between tools.</span></div></a>
-      <a class="mini reveal" href="#health-check" data-need="AI implementation"><i><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M6 6l2 2M16 16l2 2M6 18l2-2M16 8l2-2"/><circle cx="12" cy="12" r="3"/></svg></i><div><b>Practical AI setup</b><span>Hands-on help using AI for estimates, emails and daily admin.</span></div></a>
+      <a class="mini reveal" href="#get-started" data-need="AI chatbot"><i><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg></i><div><b>AI website chatbot</b><span>Answers common questions and collects leads around the clock.</span></div></a>
+      <a class="mini reveal" href="#get-started" data-need="AI receptionist"><i><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></i><div><b>AI receptionist</b><span>Answers calls, books appointments and passes along urgent calls.</span></div></a>
+      <a class="mini reveal" href="#get-started" data-need="Missed-call text-back"><i><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></i><div><b>Missed-call text-back</b><span>Sends an instant text when you can't pick up, so the lead doesn't call your competitor.</span></div></a>
+      <a class="mini reveal" href="#get-started" data-need="Lead capture and CRM"><i><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 5h18M6 12h12M10 19h4"/></svg></i><div><b>Lead capture &amp; CRM</b><span>Puts every call, form and text into one list with follow-up reminders.</span></div></a>
+      <a class="mini reveal" href="#get-started" data-need="Workflow automation"><i><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M9 6h5a4 4 0 0 1 4 4v5"/></svg></i><div><b>Workflow automation</b><span>Automatic quotes, review requests, reminders and handoffs between tools.</span></div></a>
+      <a class="mini reveal" href="#get-started" data-need="AI implementation"><i><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M6 6l2 2M16 16l2 2M6 18l2-2M16 8l2-2"/><circle cx="12" cy="12" r="3"/></svg></i><div><b>Practical AI setup</b><span>Hands-on help using AI for estimates, emails and daily admin.</span></div></a>
     </div>
   </div>
 </section>
@@ -684,13 +768,15 @@ footer{background:#071125;color:var(--muted-dark);padding:56px 0 30px;font-size:
       <p style="margin-top:16px;color:var(--muted)">Too many good local businesses lose work to websites that are slow, broken or invisible on Google, and nobody notices. We build sites the right way, then use AI agents to keep watch so you can focus on the work.</p>
       <div class="facts">
         <div class="fact"><b>Buffalo</b><span>Based here, remote-friendly</span></div>
-        <div class="fact"><b>24/7</b><span>Automated monitoring</span></div>
-        <div class="fact"><b>1 report</b><span>a month, in plain English</span></div>
-        <div class="fact"><b>$0</b><span>for your first health check</span></div>
+        <div class="fact"><b>Unlimited</b><span>design revisions</span></div>
+        <div class="fact"><b>24/7</b><span>monitoring after launch</span></div>
+        <div class="fact"><b>$0</b><span>for your demo site</span></div>
       </div>
     </div>
     <div class="reveal">
       <h3 style="font-size:24px;margin-bottom:16px">Common questions</h3>
+      <details><summary>Is the demo site really free?</summary><p>Yes. We design a working demo of your new website at no cost and send you a private link. If you don't love it, you don't owe us anything.</p></details>
+      <details><summary>What does "unlimited revisions" mean?</summary><p>Before launch, you can ask for as many changes to your design as you like: colors, wording, photos, layout, pages. We keep refining until you're happy with it. Brand-new features beyond the agreed scope get quoted separately, and we'll always tell you upfront.</p></details>
       <details><summary>Do you need to have built my website to monitor it?</summary><p>No. Monitoring and reports work on almost any public website, including WordPress, Wix, Squarespace, Shopify and custom builds. For uptime, speed, SSL and link checks we only need your web address.</p></details>
       <details><summary>What do the AI agents actually do?</summary><p>They run scheduled checks on your site, re-test anything that fails to rule out false alarms, and write a first draft of your monthly report. A person reviews every alert and report. The agents never change your website.</p></details>
       <details><summary>Will you fix the problems you find?</summary><p>If you want us to. Fixes aren't included in monitoring, so you get a clear quote first. You're also welcome to send the report to your current web person.</p></details>
@@ -702,17 +788,17 @@ footer{background:#071125;color:var(--muted-dark);padding:56px 0 30px;font-size:
 </section>
 
 <!-- HEALTH CHECK FORM -->
-<section class="dark" id="health-check" aria-labelledby="hc-title">
+<section class="dark" id="get-started" aria-labelledby="hc-title">
   <div class="wrap hc">
     <div class="reveal">
-      <span class="eyebrow">Free website health check</span>
-      <h2 id="hc-title" style="margin-top:16px">Find out what your website is hiding.</h2>
-      <p class="lede" style="margin-top:18px">Tell us where to look. Within 1–2 business days you'll get a short report on how your site is doing.</p>
+      <span class="eyebrow">Free demo site</span>
+      <h2 id="hc-title" style="margin-top:16px">See your new website first. Free.</h2>
+      <p class="lede" style="margin-top:18px">Tell us a little about your business. We'll design a working demo of your new site and send you a private link to look at.</p>
       <div class="hc-get">
-        <div>Speed and mobile experience score</div>
-        <div>SSL, domain and security basics</div>
-        <div>Contact form test</div>
-        <div>Your top 3 SEO fixes</div>
+        <div>A custom demo designed for your business</div>
+        <div>Unlimited revisions until you love it</div>
+        <div>No cost and no obligation</div>
+        <div>Already have a site? Choose the free health check instead</div>
       </div>
       <div class="contact-lines">
         <span>Rather talk? Call <a href="tel:+16469826252">(646) 982-6252</a></span>
@@ -722,15 +808,22 @@ footer{background:#071125;color:var(--muted-dark);padding:56px 0 30px;font-size:
 
     <form class="form reveal" id="hc-form" novalidate>
       <div class="trap" aria-hidden="true"><label for="hc-trap">Leave this empty</label><input id="hc-trap" name="website" type="text" tabindex="-1" autocomplete="off"></div>
-      <div class="fld" data-f="url">
-        <label for="hc-url">Website to check</label>
-        <input id="hc-url" name="siteUrl" type="url" inputmode="url" autocomplete="url" placeholder="yourbusiness.com" required>
-        <span class="msg" id="hc-url-msg"></span>
-      </div>
+      <fieldset class="fld">
+        <legend>What would you like?</legend>
+        <div class="mode" id="hc-mode">
+          <label><input type="radio" name="mode" value="demo" checked><span><b>Free demo site</b><small>A new website, designed for you</small></span></label>
+          <label><input type="radio" name="mode" value="health"><span><b>Free health check</b><small>A check-up of your current site</small></span></label>
+        </div>
+      </fieldset>
       <div class="row">
-        <div class="fld" data-f="name"><label for="hc-name">Your name</label><input id="hc-name" type="text" autocomplete="name" required><span class="msg"></span></div>
-        <div class="fld"><label for="hc-biz">Business name <small>(optional)</small></label><input id="hc-biz" type="text" autocomplete="organization"></div>
+        <div class="fld" data-f="biz"><label for="hc-biz">Business name <small class="opt-health">(optional)</small></label><input id="hc-biz" type="text" autocomplete="organization"><span class="msg"></span></div>
+        <div class="fld" data-f="url">
+          <label for="hc-url"><span class="lbl-demo">Current website <small>(if you have one)</small></span><span class="lbl-health">Website to check</span></label>
+          <input id="hc-url" name="siteUrl" type="url" inputmode="url" autocomplete="url" placeholder="yourbusiness.com">
+          <span class="msg" id="hc-url-msg"></span>
+        </div>
       </div>
+      <div class="fld" data-f="name"><label for="hc-name">Your name</label><input id="hc-name" type="text" autocomplete="name" required><span class="msg"></span></div>
       <div class="row">
         <div class="fld" data-f="email"><label for="hc-email">Email</label><input id="hc-email" type="email" autocomplete="email" required><span class="msg"></span></div>
         <div class="fld" data-f="phone"><label for="hc-phone">Phone <small>(optional)</small></label><input id="hc-phone" type="tel" autocomplete="tel"><span class="msg"></span></div>
@@ -758,7 +851,7 @@ footer{background:#071125;color:var(--muted-dark);padding:56px 0 30px;font-size:
           <label class="pill"><input type="checkbox" value="AI implementation"><span>AI setup</span></label>
         </div>
       </fieldset>
-      <div class="fld"><label for="hc-notes">Anything we should know? <small>(optional)</small></label><textarea id="hc-notes" placeholder="e.g. Our contact form never seems to send anything."></textarea></div>
+      <div class="fld"><label for="hc-notes"><span class="lbl-demo">Tell us about your business</span><span class="lbl-health">Anything we should know?</span> <small>(optional)</small></label><textarea id="hc-notes" placeholder="Your services, the area you serve, colors you like, websites you admire…"></textarea></div>
       <fieldset class="fld">
         <legend>Best way to reach you</legend>
         <div class="pills" id="hc-contact">
@@ -772,7 +865,7 @@ footer{background:#071125;color:var(--muted-dark);padding:56px 0 30px;font-size:
       <span class="msg" id="hc-sms-msg"></span>
       <label class="consent"><input type="checkbox" id="hc-mkt"><span>Send me occasional website tips and offers by email. Unsubscribe anytime.</span></label>
       <div class="send-error" id="hc-error" hidden></div>
-      <button class="btn btn-signal" type="submit" id="hc-submit">Get my free health check <span class="arrow" aria-hidden="true">→</span></button>
+      <button class="btn btn-signal" type="submit" id="hc-submit"><span id="hc-submit-label">Get my free demo site</span> <span class="arrow" aria-hidden="true">→</span></button>
     </form>
   </div>
 </section>
@@ -786,7 +879,7 @@ footer{background:#071125;color:var(--muted-dark);padding:56px 0 30px;font-size:
         <p>Website design, AI-agent monitoring and monthly SEO and security reports for local businesses. Based in Buffalo, serving Western New York including Amherst, Cheektowaga, Tonawanda, Niagara Falls and surrounding towns.</p>
       </div>
       <div><h4>Services</h4><ul><li><a href="#services">Website design</a></li><li><a href="#monitoring">Website monitoring</a></li><li><a href="#reports">SEO &amp; security reports</a></li><li><a href="#more">Automation &amp; AI</a></li></ul></div>
-      <div><h4>Company</h4><ul><li><a href="#work">Our work</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#faq">FAQ</a></li><li><a href="#health-check">Free health check</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="#work">Our work</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#faq">FAQ</a></li><li><a href="#get-started">Free demo site</a></li></ul></div>
       <div><h4>Contact</h4><ul><li><a href="tel:+16469826252">(646) 982-6252</a></li><li><a href="mailto:hello@snowbelttech.com">hello@snowbelttech.com</a></li><li><a href="https://www.linkedin.com/company/snowbelt-tech" rel="noopener" target="_blank">LinkedIn</a></li><li><span style="display:inline-flex;min-height:36px;align-items:center">Buffalo, New York</span></li></ul></div>
     </div>
     <div class="legal"><span>© <span id="yr">2026</span> SnowBeltTech. All rights reserved.</span><nav aria-label="Legal"><a href="/privacy-policy/">Privacy policy</a><a href="/sms-terms/">SMS terms</a></nav></div>
@@ -849,15 +942,15 @@ footer{background:#071125;color:var(--muted-dark);padding:56px 0 30px;font-size:
     setInterval(() => { s = s >= 58 ? 3 : s + 1; ago.textContent = s + 's'; }, 1000);
   }
 
-  // hero quick check → prefill the form
-  const qf = document.getElementById('quick-check'), qu = document.getElementById('quick-url');
-  const url = document.getElementById('hc-url');
-  qf.addEventListener('submit', e => {
-    e.preventDefault();
-    if (qu.value.trim()) url.value = qu.value.trim();
-    document.getElementById('health-check').scrollIntoView({behavior: reduce ? 'auto' : 'smooth'});
-    setTimeout(() => document.getElementById(url.value ? 'hc-name' : 'hc-url').focus({preventScroll:true}), reduce ? 0 : 600);
-  });
+  // demo / health-check switch
+  const formEl = document.getElementById('hc-form');
+  const setMode = m => {
+    const r = formEl.querySelector('input[name=mode][value="' + m + '"]'); if (r) r.checked = true;
+    formEl.classList.toggle('is-health', m === 'health');
+    document.getElementById('hc-submit-label').textContent = m === 'health' ? 'Get my free health check' : 'Get my free demo site';
+  };
+  formEl.querySelectorAll('input[name=mode]').forEach(r => r.addEventListener('change', () => setMode(r.value)));
+  document.querySelectorAll('a[href="#get-started"]').forEach(a => a.addEventListener('click', () => setMode(a.dataset.mode || 'demo')));
   // "More services" cards preselect their interest
   document.querySelectorAll('.mini[data-need]').forEach(a => a.addEventListener('click', () => {
     const box = document.querySelector('#hc-needs input[value="' + a.dataset.need + '"]');
@@ -885,12 +978,16 @@ footer{background:#071125;color:var(--muted-dark);padding:56px 0 30px;font-size:
     const e = {};
     const contact = form.querySelector('input[name=pc]:checked').value;
     const ph = $('hc-phone').value.replace(/\D/g,'');
-    if (!normUrl($('hc-url').value)) e.url = 'Enter a website address, like yourbusiness.com';
+    const health = form.classList.contains('is-health');
+    const rawUrl = $('hc-url').value.trim();
+    if (health && !normUrl(rawUrl)) e.url = 'Enter a website address, like yourbusiness.com';
+    else if (rawUrl && !normUrl(rawUrl)) e.url = 'That doesn’t look like a web address. Leave it blank if you don’t have a site.';
+    if (!health && !$('hc-biz').value.trim()) e.biz = 'Add your business name so we can design around it.';
     if (!$('hc-name').value.trim()) e.name = 'Please add your name.';
-    if (!/^\S+@\S+\.\S+$/.test($('hc-email').value.trim())) e.email = 'Add an email so we can send your report.';
+    if (!/^\S+@\S+\.\S+$/.test($('hc-email').value.trim())) e.email = 'Add an email so we can reach you.';
     if ((contact === 'Text' || contact === 'Phone') && ph.length < 10) e.phone = 'Add a phone number, or choose email.';
     if ($('hc-sms').checked && ph.length < 10) e.sms = 'Add a mobile number above to receive texts, or clear the text-message box.';
-    ['url','name','email','phone'].forEach(k => setErr(k, e[k]));
+    ['biz','url','name','email','phone'].forEach(k => setErr(k, e[k]));
     $('hc-sms-msg').textContent = e.sms || '';
     return e;
   }
@@ -906,16 +1003,21 @@ footer{background:#071125;color:var(--muted-dark);padding:56px 0 30px;font-size:
     const needs = [...form.querySelectorAll('#hc-needs input:checked')].map(i => i.value);
     const contact = form.querySelector('input[name=pc]:checked').value;
     const notes = $('hc-notes').value.trim();
+    const health = form.classList.contains('is-health');
+    const biz = $('hc-biz').value.trim();
+    const goal = health
+      ? 'FREE WEBSITE HEALTH CHECK for ' + site
+      : 'FREE DEMO SITE for ' + biz + (site ? ' (current site: ' + site + ')' : ' (no current site)');
     const payload = {
-      requestType: 'website-health-check',
+      requestType: health ? 'website-health-check' : 'free-demo-site',
       siteUrl: site,
       name: $('hc-name').value.trim(),
       businessName: $('hc-biz').value.trim(),
       email: $('hc-email').value.trim(),
       phone: $('hc-phone').value.trim(),
       businessType: $('hc-type').value,
-      goal: 'FREE WEBSITE HEALTH CHECK for ' + site + (notes ? ' | Notes: ' + notes : ''),
-      needs: ['Website health check'].concat(needs),
+      goal: goal + (notes ? ' | Notes: ' + notes : ''),
+      needs: [health ? 'Website health check' : 'Free demo site'].concat(needs),
       preferredContact: contact,
       marketingConsent: $('hc-mkt').checked,
       smsConsent: $('hc-sms').checked,
@@ -929,7 +1031,7 @@ footer{background:#071125;color:var(--muted-dark);padding:56px 0 30px;font-size:
     payload.submissionId = pending.id; payload.submittedAt = pending.at;
 
     sending = true; $('hc-error').hidden = true;
-    const btn = $('hc-submit'); btn.disabled = true; btn.firstChild.textContent = 'Sending… ';
+    const btn = $('hc-submit'); btn.disabled = true; $('hc-submit-label').textContent = 'Sending…';
     const ctl = new AbortController(); const to = setTimeout(() => ctl.abort(), 15000);
     fetch(WEBHOOK, { method:'POST', signal:ctl.signal, headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) })
       .then(async r => {
@@ -937,8 +1039,10 @@ footer{background:#071125;color:var(--muted-dark);padding:56px 0 30px;font-size:
         if (!r.ok) throw new Error('HTTP ' + r.status);
         const rc = await r.json();
         if (rc.ok !== true) throw new Error('not confirmed');
-        form.innerHTML = '<div class="done" role="status"><div class="done-icon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><h3 style="font-size:26px">Got it. We’re on it.</h3><p style="color:var(--muted);max-width:420px">We’ll check <b></b> and send your health check within 1–2 business days.</p></div>';
-        form.querySelector('.done b').textContent = site.replace(/^https?:\/\//,'').replace(/\/$/,'');
+        form.innerHTML = '<div class="done" role="status"><div class="done-icon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><h3 style="font-size:26px">Got it. We’re on it.</h3><p style="color:var(--muted);max-width:420px"></p></div>';
+        form.querySelector('.done p').textContent = health
+          ? 'We’ll check ' + site.replace(/^https?:\/\//,'').replace(/\/$/,'') + ' and send your health check within 1–2 business days.'
+          : 'We’ll be in touch shortly about your free demo site for ' + biz + '.';
         form.querySelector('.done').focus?.();
       })
       .catch(() => {
@@ -946,7 +1050,7 @@ footer{background:#071125;color:var(--muted-dark);padding:56px 0 30px;font-size:
         $('hc-error').textContent = 'We couldn’t send that just now. Please try again, or call (646) 982-6252 / email hello@snowbelttech.com.';
         $('hc-error').hidden = false;
       })
-      .finally(() => { sending = false; btn.disabled = false; btn.firstChild.textContent = 'Get my free health check '; });
+      .finally(() => { sending = false; btn.disabled = false; setMode(health ? 'health' : 'demo'); });
   });
 })();
 </script>
