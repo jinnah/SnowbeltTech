@@ -518,7 +518,7 @@
       <div class="fld" data-f="name"><label for="hc-name">Your name</label><input id="hc-name" type="text" autocomplete="name" required><span class="msg"></span></div>
       <div class="row">
         <div class="fld" data-f="email"><label for="hc-email">Email</label><input id="hc-email" type="email" autocomplete="email" required><span class="msg"></span></div>
-        <div class="fld" data-f="phone"><label for="hc-phone">Phone <small>(optional)</small></label><input id="hc-phone" type="tel" autocomplete="tel"><span class="msg"></span></div>
+        <div class="fld" data-f="phone"><label for="hc-phone">Phone <small id="hc-phone-opt">(optional)</small></label><input id="hc-phone" type="tel" inputmode="tel" autocomplete="tel"><span class="msg"></span></div>
       </div>
       <div class="fld">
         <label for="hc-type">Type of business</label>
@@ -640,6 +640,16 @@
   }
   form.querySelectorAll('input[name=mode]').forEach(r => r.addEventListener('change', () => setMode(r.value)));
 
+  // Email is always required; Text or Phone call also makes the phone number required
+  function syncContact(){
+    const c = form.querySelector('input[name=pc]:checked').value, needPhone = c !== 'Email';
+    const ph = $('hc-phone');
+    ph.required = needPhone; ph.setAttribute('aria-required', String(needPhone));
+    $('hc-phone-opt').hidden = needPhone;
+    if (!needPhone) setErr('phone', '');
+  }
+  form.querySelectorAll('input[name=pc]').forEach(r => r.addEventListener('change', syncContact));
+
   // in-page links to the form (#get-started, /?mode=…#get-started) set the mode instead of reloading
   document.querySelectorAll('a[href*="#get-started"]').forEach(a => a.addEventListener('click', e => {
     const u = new URL(a.href, location.href);
@@ -680,12 +690,16 @@
     if (m === 'demo' && !$('hc-biz').value.trim()) e.biz = 'Add your business name so we can design around it.';
     if (!$('hc-name').value.trim()) e.name = 'Please add your name.';
     if (!/^\S+@\S+\.\S+$/.test($('hc-email').value.trim())) e.email = 'Add an email so we can reach you.';
-    if ((contact === 'Text' || contact === 'Phone') && ph.length < 10) e.phone = 'Add a phone number, or choose email.';
+    if (contact !== 'Email' && ph.length < 10) e.phone = contact === 'Text'
+      ? 'Add a mobile number (10 digits) so we can text you, or choose Email.'
+      : 'Add a phone number (10 digits) so we can call you, or choose Email.';
     if ($('hc-sms').checked && ph.length < 10) e.sms = 'Add a mobile number above to receive texts, or clear the text-message box.';
     ['biz','url','name','email','phone'].forEach(k => setErr(k, e[k]));
     $('hc-sms-msg').textContent = e.sms || '';
     return e;
   }
+  syncContact();
+
   form.addEventListener('submit', ev => {
     ev.preventDefault();
     if (sending) return;
